@@ -1,4 +1,8 @@
 from flask import Flask, render_template
+from content_management import content
+
+TOPIC_DIC = content()
+
  
 app = Flask(__name__)
 
@@ -13,27 +17,15 @@ def homepage():
     except Exception, e:
         return str(e)
 
-@app.route('/about')
-def aboutpage():
-
-    title = "About this site"
-    paragraph = ["blah blah blah memememememmeme blah blah memememe"]
-
-    pageType = 'about'
-
-    return render_template("index.html", title=title, paragraph=paragraph, pageType=pageType)
+@app.route('/dashboard/')
+def dashboard():
+	return render_template("dashboard.html", TOPIC_DIC = TOPIC_DIC)
 
 
-@app.route('/about/contact')
-def contactPage():
 
-    title = "About this site"
-    paragraph = ["blah blah blah memememememmeme blah blah memememe"]
-
-    pageType = 'about'
-
-    return render_template("index.html", title=title, paragraph=paragraph, pageType=pageType)
-
+@app.erorhandler(404)
+def page_not_found(e):
+	return render_template("404.html") 
 
  
 if __name__ == "__main__":
