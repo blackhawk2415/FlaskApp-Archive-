@@ -22,8 +22,13 @@ def dashboard():
 	return render_template("dashboard.html", TOPIC_DIC = TOPIC_DIC)
 
 
+@app.route('/slashboard/'):
+def slashboard():
+	return render_template("dashboard.html", TOPIC_DIC = TOPIC_DIC)
 
-@app.erorhandler(404)
+
+
+@app.errorhandler(404)
 def page_not_found(e):
 	return render_template("404.html") 
 
