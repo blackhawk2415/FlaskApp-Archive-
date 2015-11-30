@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request, url_for, redirect 
+lfrom flask import Flask, render_template, flash
 from content_management import content
 
 TOPIC_DIC = content()
@@ -35,28 +35,7 @@ def slashboard():
 
 @app.route('/login/', methods = ['GET', 'POST'])
 def login_page():
-	error = None 	
-	try:
-		if request.method == "POST":
-			attempted_username = request.form['Username']
-			attempted_password = request.form['Password']
-
-			flash(attempted_username)
-			flash(attempted_password)
-
-
-			if attempted_username == "admin" and attempted_password == "password":
-				return redirect(url_for('dashboard'))
-
-			else: 
-				error = "Bad username or password, please try again."
-
-
-		return render_template("login.html", error=e)
-
-	except Exception as e:
-		flash(e)
-		return render_template("login.html", error=e)
+	return render_template("login.html")
 
 
 
