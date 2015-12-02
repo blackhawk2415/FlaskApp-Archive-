@@ -1,5 +1,11 @@
 from flask import Flask, render_template, flash, request, url_for, redirect 
 from content_management import content
+from wtforms import Form
+
+
+from dbconnect import connection 
+
+
 
 TOPIC_DIC = content()
 
@@ -57,6 +63,20 @@ def login_page():
 	except Exception as e:
 		flash(e)
 		return render_template("login.html", error=e)
+
+
+
+
+@app.route("/register/", methods = ['GET', 'POST'])
+def register_page():
+	try:
+		return("register page")
+		c, conn = connection()
+	except Exception as e:
+		return(str(e))
+	
+
+
 
 
 
