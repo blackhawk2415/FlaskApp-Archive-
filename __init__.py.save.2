@@ -1,9 +1,5 @@
-from flask import Flask, render_template, flash, request, url_for, redirect 
+sufrom flask import Flask, render_template, flash, request, url_for, redirect 
 from content_management import content
-from wtforms import Form, StringField
-
-
-
 
 from dbconnect import connection 
 
@@ -66,9 +62,6 @@ def login_page():
 		flash(e)
 		return render_template("login.html", error=e)
 
-
-
-
 @app.route("/register/", methods = ['GET', 'POST'])
 def register_page():
 	try:
@@ -78,9 +71,9 @@ def register_page():
 		return(str(e))
 	
 
-class RegistrationForm(Form):
-	username = StringField("Username", [validators.Length(min=4, max=20)])		
-	
+
+
+
 
 
 @app.errorhandler(404)
