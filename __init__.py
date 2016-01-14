@@ -79,25 +79,25 @@ def register_page():
 			username = form.username.data
 			email = form.email.data
 			password = sha256_crypt.encrypt((str(form.password.data)))
-		c, conn = connection()
+			c, conn = connection()
 
-		# Check if username exists
-		x = c.execute("SELECT * FROM users WHERE username = (%s)", 
-				(thwart(username)))
+			# Check if username exists
+			x = c.execute("SELECT * FROM users WHERE username = (%s)", 
+					(thwart(username)))
 		
 			if int(len(x)) > 0:
 				flash("That username is already taken, please choose another")
 				return render_template('register.html', form=form)
+
 			else:
-				c.execute("INSERT INTO users (username, password, email, tracking) VALUES (%s, %s, %s, %s)",
-					(thwart(username), thwart(password), thwart(email), thwart("/home")))
+				c.execute("INSERT INTO users (username, password, email, tracking) VALUES (%s, %s, %s, %s)", (thwart(username), thwart(password), thwart(email), thwart("/home")))
 				conn.commit()
 				flash("Thanks for registering")
 				c.close()
 				conn.close()
 				gc.collect()
 
-			# session is essentially a dictionary and seen as cookie, that can store anything
+				# session is essentially a dictionary and seen as cookie, that can store anything
 				session['logged_in'] = True
 				session['username'] = username
 
